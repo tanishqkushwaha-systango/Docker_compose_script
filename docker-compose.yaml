@@ -16,7 +16,7 @@ services:  # Before Running all the services first start the sqlserver separatel
   dotnetcoreapi:
     image: dotnet-image
     ports:
-      - "81:80"
+      - "81:80"  
     links:
       - sqlserver
     restart: always
@@ -24,6 +24,8 @@ services:  # Before Running all the services first start the sqlserver separatel
       - default
     environment:
       - DBHOST=sqlserver
+    depends_on:
+      - sqlserver
   angular:
     image: angular-image
     ports:
