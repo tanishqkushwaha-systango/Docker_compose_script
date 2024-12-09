@@ -11,10 +11,12 @@ services:  # Before Running all the services first start the sqlserver separatel
     networks:
       - default
     environment:
-       - SA_PASSWORD=password
+       - SA_PASSWORD=Password@1234
        - ACCEPT_EULA=Y
   dotnetcoreapi:
-    image: dotnet-image
+    build:
+      context: ./ElectricEquipmentDotNetCoreAPI
+      dockerfile: Dockerfile 
     ports:
       - "81:80"  
     links:
@@ -27,7 +29,9 @@ services:  # Before Running all the services first start the sqlserver separatel
     depends_on:
       - sqlserver
   angular:
-    image: angular-image
+    build:
+      context: ./ElectronicEquipmentAngular
+      dockerfile: Dockerfile
     ports:
       - "80:80"
     links:
